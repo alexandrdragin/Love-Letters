@@ -3,10 +3,10 @@
 
   const DEFAULTS = {
     discordEnabled: true,
-    discordNames: ["Dionis | Usual Goblin"],
+    discordNames: ["Denis"],
     filterMode: "replace",
     githubEnabled: true,
-    githubNames: ["Dionis404"],
+    githubNames: ["Denis"],
     replacementText: "Nice Idea!",
   };
 
