@@ -5,6 +5,28 @@ A small, open-source Chrome extension that locally replaces or hides messages fr
 > The main idea of this project is to **reduce stress, save your aura from
 > toxic vibes and stay positive**.
 
+## Why Love-Letters exists
+
+Love-Letters is not aimed at any particular person. It addresses a common
+internet problem: sometimes built-in controls or community moderation do not
+give you enough control over persistent spam or unwanted noise. Whether that
+noise comes from an ex, a persistent spammer, or simply an account you would
+rather see less of, Love-Letters gives you a private, local last-mile filter.
+It changes only your own browser and does not affect the sender, the platform,
+or anyone else's view.
+
+## Share it with your community
+
+> Sorry for the self-promo, but someone here might find this useful. I guess many
+> of us have an ex, a persistent spammer, or simply some online noise we'd rather
+> see less of. Love-Letters is a tiny open-source Chrome extension that lets you
+> locally hide or replace messages from selected users on Discord and GitHub.
+> It doesn't block, report, or change anything for anyone else—it only gives you
+> more control over what appears in your own browser. Stay positive and save
+> your aura from toxic vibes 💌
+>
+> https://github.com/alexandrdragin/Love-Letters
+
 Github — replace mode
 <img width="1070" height="176" alt="image" src="https://github.com/user-attachments/assets/4514825e-cc1e-4ffa-85f6-a808c4a69419" />
 
