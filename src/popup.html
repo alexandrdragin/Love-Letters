@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hide User Messages</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark" aria-hidden="true">H</div>
+        <div>
+          <h1>Hide User Messages</h1>
+          <p>Local filters for Discord and GitHub</p>
+        </div>
+      </header>
+
+      <form id="settings-form">
+        <section>
+          <label class="site-toggle">
+            <span>
+              <strong>Discord</strong>
+              <small>Visible display names, one per line</small>
+            </span>
+            <input id="discord-enabled" type="checkbox" />
+          </label>
+          <textarea
+            id="discord-names"
+            rows="3"
+            aria-label="Discord display names"
+            spellcheck="false"
+            placeholder="Dionis | Usual Goblin"
+          ></textarea>
+        </section>
+
+        <section>
+          <label class="site-toggle">
+            <span>
+              <strong>GitHub</strong>
+              <small>Account logins without @, one per line</small>
+            </span>
+            <input id="github-enabled" type="checkbox" />
+          </label>
+          <textarea
+            id="github-names"
+            rows="3"
+            aria-label="GitHub account logins"
+            spellcheck="false"
+            placeholder="Dionis404"
+          ></textarea>
+        </section>
+
+        <div class="footer">
+          <span id="status" role="status" aria-live="polite"></span>
+          <button type="submit">Save filters</button>
+        </div>
+      </form>
+
+      <p class="privacy">Names stay in this Chrome profile. No network requests.</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

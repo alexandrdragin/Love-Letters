@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Hide User Messages",
+  "version": "1.0.0",
+  "description": "Locally hides messages from selected users on Discord and GitHub.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Hide User Messages",
+    "default_popup": "src/popup.html"
+  },
+  "options_ui": {
+    "page": "src/popup.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://discord.com/*", "https://github.com/*"],
+      "js": ["src/core.js", "src/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

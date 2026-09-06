@@ -1,0 +1,49 @@
+(function exposeCore(root, factory) {
+  const api = factory();
+
+  if (typeof module === "object" && module.exports) {
+    module.exports = api;
+  }
+
+  root.HideUserMessagesCore = api;
+})(typeof globalThis !== "undefined" ? globalThis : this, function createCore() {
+  function normalizeName(value) {
+    return String(value ?? "").trim().toLocaleLowerCase();
+  }
+
+  function normalizeNames(values) {
+    return new Set(
+      (Array.isArray(values) ? values : [])
+        .map(normalizeName)
+        .filter(Boolean),
+    );
+  }
+
+  function isTarget(name, targets) {
+    return targets.has(normalizeName(name));
+  }
+
+  function githubLoginFromHref(href) {
+    if (typeof href !== "string" || !href.startsWith("/")) {
+      return "";
+    }
+
+    const [login, extra] = href.slice(1).split("/");
+    if (!login || extra) {
+      return "";
+    }
+
+    try {
+      return decodeURIComponent(login);
+    } catch {
+      return login;
+    }
+  }
+
+  return {
+    githubLoginFromHref,
+    isTarget,
+    normalizeName,
+    normalizeNames,
+  };
+});
