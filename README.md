@@ -14,15 +14,6 @@ rather see less of, Love-Letters gives you a private, local last-mile filter.
 It changes only your own browser and does not affect the sender, the platform,
 or anyone else's view.
 
-Github — replace mode
-<img width="1070" height="176" alt="image" src="https://github.com/user-attachments/assets/4514825e-cc1e-4ffa-85f6-a808c4a69419" />
-<img width="1007" height="241" alt="image" src="https://github.com/user-attachments/assets/8fef1c57-0df5-43ac-855e-ecfb9a1c6b1f" />
-
-Discord — hide mode
-
-<img width="789" height="165" alt="image" src="https://github.com/user-attachments/assets/04a17c67-afe1-479d-ab25-7c159fa8aedd" />
-<img width="801" height="116" alt="image" src="https://github.com/user-attachments/assets/08b49aec-1327-4268-9aaf-47b603604bd0" />
-
 
 The default action is **Replace** and the default replacement is `Nice Idea!`.
 
