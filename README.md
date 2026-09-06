@@ -1,13 +1,19 @@
 # Hide User Messages
 
 A small, open-source Chrome extension that locally hides messages from selected
-users on Discord and GitHub. It does not block, report, delete, or modify any
-content on either service—the matching elements are only hidden in your browser.
+users on Discord and GitHub—or replaces their content with a positive phrase of
+your choice. It does not block, report, delete, or modify any content on either
+service: the change exists only in your browser.
+
+> The main idea of this project is to **stay positive and save your aura from
+> toxic vibes**.
 
 The default filters are:
 
 - Discord display name: `Dionis | Usual Goblin`
 - GitHub login: `Dionis404`
+
+The default action is **Replace** and the default replacement is `Nice Idea!`.
 
 ## Install from source
 
@@ -30,11 +36,13 @@ version and use the extension page's **Reload** button when you want to update i
 
 1. Click the extension's toolbar icon (pin it from Chrome's Extensions menu if
    needed).
-2. In **Discord**, enter the visible display name exactly as it appears above a
+2. Choose whether matching messages should be completely hidden or replaced,
+   and customize the positive replacement text if needed.
+3. In **Discord**, enter the visible display name exactly as it appears above a
    message. In **GitHub**, enter the account login without `@`.
-3. Put one name per line. Matching is exact after trimming whitespace and is
+4. Put one name per line. Matching is exact after trimming whitespace and is
    case-insensitive.
-4. Use each site's checkbox to temporarily disable its filter, then click
+5. Use each site's checkbox to temporarily disable its filter, then click
    **Save filters**.
 
 Changes apply to open pages immediately. The names and toggles are stored with
@@ -45,9 +53,12 @@ no network requests and has no analytics.
 
 - On Discord, it scans rendered message list items and resolves their author
   through the message's `aria-labelledby` relationship. This also covers compact
-  follow-up messages where Discord does not repeat the visible username.
-- On GitHub, it finds comment-author profile links and hides their nearest issue,
-  pull-request, or review-comment container.
+  follow-up messages where Discord does not repeat the visible username. Replace
+  mode keeps the author header but removes the original text, reply preview,
+  attachments, and reactions.
+- On GitHub, it finds comment-author profile links and locates their nearest issue,
+  pull-request, or review-comment container. Replace mode keeps the comment
+  header and substitutes the body.
 - A `MutationObserver` reapplies the filter when either single-page application
   renders more content.
 
@@ -75,8 +86,9 @@ script. The only extension permission is `storage`.
 
 Loading an unpacked extension gives its content script access to the DOM of the
 matched Discord and GitHub pages. Review the source before installing it. The
-current code reads author labels and hides matching containers; it does not read
-cookies, intercept requests, send data, or contact a server.
+current code reads author labels and hides matching containers or message bodies;
+it does not read cookies, intercept requests, send data, or contact a server.
+Replacement text is inserted with `textContent`, not interpreted as HTML.
 
 Filtering by a mutable display name can hide the wrong person's messages. Do not
 use this extension as a security, abuse-prevention, compliance, or moderation

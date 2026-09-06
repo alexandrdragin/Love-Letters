@@ -3,22 +3,47 @@
 
   const core = globalThis.HideUserMessagesCore;
   const HIDDEN_ATTRIBUTE = "data-hide-user-messages-hidden";
+  const ORIGINAL_HIDDEN_ATTRIBUTE = "data-hide-user-messages-original-hidden";
+  const REPLACEMENT_ATTRIBUTE = "data-hide-user-messages-replacement";
   const DEFAULTS = {
     discordEnabled: true,
     discordNames: ["Dionis | Usual Goblin"],
+    filterMode: "replace",
     githubEnabled: true,
     githubNames: ["Dionis404"],
+    replacementText: "Nice Idea!",
   };
 
   let settings = DEFAULTS;
   let scheduled = false;
 
-  function installHidingStyle() {
+  function installStyles() {
     if (document.getElementById("hide-user-messages-style")) return;
 
     const style = document.createElement("style");
     style.id = "hide-user-messages-style";
-    style.textContent = `[${HIDDEN_ATTRIBUTE}="true"] { display: none !important; }`;
+    style.textContent = `
+      [${HIDDEN_ATTRIBUTE}="true"],
+      [${ORIGINAL_HIDDEN_ATTRIBUTE}="true"] {
+        display: none !important;
+      }
+
+      [${REPLACEMENT_ATTRIBUTE}] {
+        color: currentColor;
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      .hide-user-messages-discord-replacement {
+        margin-top: 2px;
+      }
+
+      .hide-user-messages-github-replacement {
+        min-height: 48px;
+        padding: 16px;
+        color: var(--fgColor-default, #1f2328);
+      }
+    `;
     (document.head || document.documentElement).append(style);
   }
 
@@ -32,10 +57,75 @@
     }
   }
 
+  function clearReplacement(container) {
+    if (!container) return;
+
+    container
+      .querySelectorAll(`[${ORIGINAL_HIDDEN_ATTRIBUTE}]`)
+      .forEach((element) => element.removeAttribute(ORIGINAL_HIDDEN_ATTRIBUTE));
+    container
+      .querySelectorAll(`[${REPLACEMENT_ATTRIBUTE}]`)
+      .forEach((element) => element.remove());
+  }
+
+  function replacePayload(container, payloads, placement, site) {
+    setHidden(container, false);
+
+    const usablePayloads = payloads.filter(Boolean);
+    usablePayloads.forEach((element) => {
+      element.setAttribute(ORIGINAL_HIDDEN_ATTRIBUTE, "true");
+    });
+
+    let replacement = container.querySelector(`[${REPLACEMENT_ATTRIBUTE}]`);
+    if (!replacement) {
+      const replacementTag =
+        site === "github" && placement ? placement.tagName : "div";
+      replacement = document.createElement(replacementTag);
+      replacement.setAttribute(REPLACEMENT_ATTRIBUTE, "true");
+      replacement.className = `hide-user-messages-${site}-replacement`;
+      if (placement?.hasAttribute("colspan")) {
+        replacement.setAttribute("colspan", placement.getAttribute("colspan"));
+      }
+
+      const anchor = placement || usablePayloads[0] || container.firstChild;
+      if (anchor?.parentNode) {
+        anchor.parentNode.insertBefore(replacement, anchor);
+      } else {
+        container.append(replacement);
+      }
+    }
+
+    const text = core.replacementText(settings.replacementText);
+    if (replacement.textContent !== text) {
+      replacement.textContent = text;
+    }
+  }
+
+  function applyAction(container, payloads, placement, site, matched) {
+    if (!matched) {
+      setHidden(container, false);
+      clearReplacement(container);
+      return;
+    }
+
+    if (settings.filterMode === "replace") {
+      replacePayload(container, payloads, placement, site);
+    } else {
+      clearReplacement(container);
+      setHidden(container, true);
+    }
+  }
+
   function restorePreviouslyHidden() {
     document.querySelectorAll(`[${HIDDEN_ATTRIBUTE}]`).forEach((element) => {
       setHidden(element, false);
     });
+    document
+      .querySelectorAll(`[${ORIGINAL_HIDDEN_ATTRIBUTE}]`)
+      .forEach((element) => element.removeAttribute(ORIGINAL_HIDDEN_ATTRIBUTE));
+    document
+      .querySelectorAll(`[${REPLACEMENT_ATTRIBUTE}]`)
+      .forEach((element) => element.remove());
   }
 
   function discordAuthorFor(messageItem, previousAuthor) {
@@ -66,7 +156,21 @@
       .forEach((messageItem) => {
         const author = discordAuthorFor(messageItem, previousAuthor);
         if (author) previousAuthor = author;
-        setHidden(messageItem, enabled && core.isTarget(author, targets));
+        const content = messageItem.querySelector('[id^="message-content-"]');
+        const payloads = [
+          content,
+          messageItem.querySelector('[id^="message-accessories-"]'),
+          messageItem.querySelector('[id^="message-reactions-"]'),
+          messageItem.querySelector('[id^="message-reply-context-"]'),
+        ];
+
+        applyAction(
+          messageItem,
+          payloads,
+          content,
+          "discord",
+          enabled && core.isTarget(author, targets),
+        );
       });
   }
 
@@ -103,12 +207,22 @@
       seen.add(container);
 
       const login = core.githubLoginFromHref(authorLink.getAttribute("href"));
-      setHidden(container, enabled && core.isTarget(login, targets));
+      const body = container.querySelector(
+        '.comment-body, .js-comment-body, [data-testid="comment-body"], .markdown-body',
+      );
+
+      applyAction(
+        container,
+        [body],
+        body,
+        "github",
+        enabled && core.isTarget(login, targets),
+      );
     });
   }
 
   function applyFilters() {
-    installHidingStyle();
+    installStyles();
 
     if (location.hostname === "discord.com") {
       filterDiscord();

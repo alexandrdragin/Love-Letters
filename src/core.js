@@ -40,10 +40,16 @@
     }
   }
 
+  function replacementText(value, fallback = "Nice Idea!", maxLength = 200) {
+    const cleaned = String(value ?? "").trim() || fallback;
+    return cleaned.slice(0, maxLength);
+  }
+
   return {
     githubLoginFromHref,
     isTarget,
     normalizeName,
     normalizeNames,
+    replacementText,
   };
 });

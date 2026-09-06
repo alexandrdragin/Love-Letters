@@ -94,7 +94,9 @@ input[type="checkbox"] {
   accent-color: #7c6cf2;
 }
 
-textarea {
+textarea,
+input[type="text"],
+select {
   width: 100%;
   resize: vertical;
   min-height: 62px;
@@ -112,6 +114,38 @@ textarea {
 textarea:focus {
   border-color: #7c6cf2;
   box-shadow: 0 0 0 3px rgb(124 108 242 / 18%);
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #7c6cf2;
+  box-shadow: 0 0 0 3px rgb(124 108 242 / 18%);
+}
+
+.action-section {
+  display: grid;
+  gap: 7px;
+}
+
+.field-label {
+  color: #c5cad3;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+select,
+input[type="text"] {
+  min-height: 36px;
+  padding: 8px 10px;
+}
+
+select {
+  margin-bottom: 3px;
+}
+
+input[type="text"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .footer {
@@ -165,7 +199,9 @@ button:focus-visible {
     background: #f7f8fa;
   }
 
-  textarea {
+  textarea,
+  input[type="text"],
+  select {
     border-color: #d2d6dd;
     background: #ffffff;
     color: #17191f;

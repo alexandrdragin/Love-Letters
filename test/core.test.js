@@ -16,3 +16,9 @@ test("extracts only a GitHub profile login from a relative href", () => {
   assert.equal(core.githubLoginFromHref("/Dionis404/repositories"), "");
   assert.equal(core.githubLoginFromHref("https://github.com/Dionis404"), "");
 });
+
+test("cleans and limits replacement text", () => {
+  assert.equal(core.replacementText("  Nice Idea!  "), "Nice Idea!");
+  assert.equal(core.replacementText("   "), "Nice Idea!");
+  assert.equal(core.replacementText("abcdef", "fallback", 4), "abcd");
+});

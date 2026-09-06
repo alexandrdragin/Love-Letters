@@ -1,8 +1,8 @@
 {
   "name": "hide-user-messages",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "A local Chrome extension that hides messages from selected users on Discord and GitHub.",
+  "description": "A local Chrome extension that hides or replaces messages from selected users on Discord and GitHub.",
   "scripts": {
     "check": "node --check src/core.js && node --check src/content.js && node --check src/popup.js",
     "test": "node --test"

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Hide User Messages",
-  "version": "1.0.0",
-  "description": "Locally hides messages from selected users on Discord and GitHub.",
+  "version": "1.1.0",
+  "description": "Hide or positively replace selected users' messages on Discord and GitHub.",
   "permissions": ["storage"],
   "action": {
     "default_title": "Hide User Messages",

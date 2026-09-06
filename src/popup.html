@@ -17,6 +17,21 @@
       </header>
 
       <form id="settings-form">
+        <section class="action-section">
+          <label class="field-label" for="filter-mode">For matching messages</label>
+          <select id="filter-mode">
+            <option value="replace">Replace with something positive</option>
+            <option value="hide">Hide completely</option>
+          </select>
+          <label class="field-label" for="replacement-text">Replacement text</label>
+          <input
+            id="replacement-text"
+            type="text"
+            maxlength="200"
+            placeholder="Nice Idea!"
+          />
+        </section>
+
         <section>
           <label class="site-toggle">
             <span>
