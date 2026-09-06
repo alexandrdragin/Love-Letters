@@ -1,4 +1,4 @@
-# Hide User Messages
+# Love-Letters
 
 A small, open-source Chrome extension that locally hides messages from selected
 users on Discord and GitHub—or replaces their content with a positive phrase of
@@ -34,7 +34,7 @@ The default action is **Replace** and the default replacement is `Nice Idea!`.
 1. Download this repository with **Code → Download ZIP** and extract it, or run:
 
    ```bash
-   git clone https://github.com/alexandrdragin/hide-user-messages.git
+   git clone https://github.com/alexandrdragin/Love-Letters.git
    ```
 
 2. Open `chrome://extensions` in Chrome.

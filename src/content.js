@@ -2,9 +2,9 @@
   "use strict";
 
   const core = globalThis.HideUserMessagesCore;
-  const HIDDEN_ATTRIBUTE = "data-hide-user-messages-hidden";
-  const ORIGINAL_HIDDEN_ATTRIBUTE = "data-hide-user-messages-original-hidden";
-  const REPLACEMENT_ATTRIBUTE = "data-hide-user-messages-replacement";
+  const HIDDEN_ATTRIBUTE = "data-love-letters-hidden";
+  const ORIGINAL_HIDDEN_ATTRIBUTE = "data-love-letters-original-hidden";
+  const REPLACEMENT_ATTRIBUTE = "data-love-letters-replacement";
   const DEFAULTS = {
     discordEnabled: true,
     discordNames: ["Dionis | Usual Goblin"],
@@ -18,10 +18,10 @@
   let scheduled = false;
 
   function installStyles() {
-    if (document.getElementById("hide-user-messages-style")) return;
+    if (document.getElementById("love-letters-style")) return;
 
     const style = document.createElement("style");
-    style.id = "hide-user-messages-style";
+    style.id = "love-letters-style";
     style.textContent = `
       [${HIDDEN_ATTRIBUTE}="true"],
       [${ORIGINAL_HIDDEN_ATTRIBUTE}="true"] {
@@ -34,11 +34,11 @@
         opacity: 0.9;
       }
 
-      .hide-user-messages-discord-replacement {
+      .love-letters-discord-replacement {
         margin-top: 2px;
       }
 
-      .hide-user-messages-github-replacement {
+      .love-letters-github-replacement {
         min-height: 48px;
         padding: 16px;
         color: var(--fgColor-default, #1f2328);
@@ -82,7 +82,7 @@
         site === "github" && placement ? placement.tagName : "div";
       replacement = document.createElement(replacementTag);
       replacement.setAttribute(REPLACEMENT_ATTRIBUTE, "true");
-      replacement.className = `hide-user-messages-${site}-replacement`;
+      replacement.className = `love-letters-${site}-replacement`;
       if (placement?.hasAttribute("colspan")) {
         replacement.setAttribute("colspan", placement.getAttribute("colspan"));
       }
