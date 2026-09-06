@@ -22,3 +22,14 @@ test("cleans and limits replacement text", () => {
   assert.equal(core.replacementText("   "), "Nice Idea!");
   assert.equal(core.replacementText("abcdef", "fallback", 4), "abcd");
 });
+
+test("selects the current Discord payload id instead of reply-preview content", () => {
+  const labels =
+    "message-reply-context-456 uid_3 message-content-456 uid_4 message-timestamp-456";
+
+  assert.equal(core.linkedId(labels, "message-content"), "message-content-456");
+  assert.equal(
+    core.linkedId(labels, "message-reply-context"),
+    "message-reply-context-456",
+  );
+});

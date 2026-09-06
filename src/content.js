@@ -131,9 +131,7 @@
   function discordAuthorFor(messageItem, previousAuthor) {
     const article = messageItem.querySelector('[role="article"]');
     const labelledBy = article?.getAttribute("aria-labelledby") || "";
-    const usernameId = labelledBy
-      .split(/\s+/)
-      .find((id) => id.startsWith("message-username-"));
+    const usernameId = core.linkedId(labelledBy, "message-username");
     const linkedUsername = usernameId
       ? document.getElementById(usernameId)
       : null;
@@ -146,6 +144,27 @@
     return text || previousAuthor || "";
   }
 
+  function discordPayloadFor(messageItem, idPrefix) {
+    const article = messageItem.querySelector('[role="article"]');
+    const labels = [
+      article?.getAttribute("aria-labelledby"),
+      article?.getAttribute("aria-describedby"),
+    ]
+      .filter(Boolean)
+      .join(" ");
+    const linkedId = core.linkedId(labels, idPrefix);
+    const linkedElement = linkedId ? document.getElementById(linkedId) : null;
+
+    if (linkedElement && messageItem.contains(linkedElement)) {
+      return linkedElement;
+    }
+
+    const messageId = messageItem.id.match(/(\d+)$/)?.[1];
+    return messageId
+      ? document.getElementById(`${idPrefix}-${messageId}`)
+      : null;
+  }
+
   function filterDiscord() {
     const targets = core.normalizeNames(settings.discordNames);
     const enabled = settings.discordEnabled && targets.size > 0;
@@ -156,12 +175,12 @@
       .forEach((messageItem) => {
         const author = discordAuthorFor(messageItem, previousAuthor);
         if (author) previousAuthor = author;
-        const content = messageItem.querySelector('[id^="message-content-"]');
+        const content = discordPayloadFor(messageItem, "message-content");
         const payloads = [
           content,
-          messageItem.querySelector('[id^="message-accessories-"]'),
-          messageItem.querySelector('[id^="message-reactions-"]'),
-          messageItem.querySelector('[id^="message-reply-context-"]'),
+          discordPayloadFor(messageItem, "message-accessories"),
+          discordPayloadFor(messageItem, "message-reactions"),
+          discordPayloadFor(messageItem, "message-reply-context"),
         ];
 
         applyAction(

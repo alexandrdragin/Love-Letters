@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Love-Letters",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Stay positive and save your aura from toxic vibes by hiding or replacing selected Discord and GitHub messages.",
   "icons": {
     "16": "icons/icon-16.png",

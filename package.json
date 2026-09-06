@@ -1,6 +1,6 @@
 {
   "name": "love-letters",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "A local Chrome extension that hides or replaces messages from selected users on Discord and GitHub.",
   "scripts": {

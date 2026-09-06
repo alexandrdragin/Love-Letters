@@ -45,9 +45,16 @@
     return cleaned.slice(0, maxLength);
   }
 
+  function linkedId(labels, prefix) {
+    return String(labels ?? "")
+      .split(/\s+/)
+      .find((id) => id.startsWith(`${prefix}-`)) || "";
+  }
+
   return {
     githubLoginFromHref,
     isTarget,
+    linkedId,
     normalizeName,
     normalizeNames,
     replacementText,
