@@ -8,6 +8,19 @@ service: the change exists only in your browser.
 > The main idea of this project is to **stay positive and save your aura from
 > toxic vibes**.
 
+Before 
+<img width="1070" height="176" alt="image" src="https://github.com/user-attachments/assets/4514825e-cc1e-4ffa-85f6-a808c4a69419" />
+
+<img width="632" height="100" alt="image" src="https://github.com/user-attachments/assets/82fa8fdb-3c73-4721-ad4c-d66249dc77c7" />
+
+
+After
+<img width="1007" height="241" alt="image" src="https://github.com/user-attachments/assets/8fef1c57-0df5-43ac-855e-ecfb9a1c6b1f" />
+
+<img width="801" height="116" alt="image" src="https://github.com/user-attachments/assets/08b49aec-1327-4268-9aaf-47b603604bd0" />
+
+
+
 The default filters are:
 
 - Discord display name: `Dionis | Usual Goblin`
