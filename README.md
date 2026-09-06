@@ -1,16 +1,11 @@
 # Love-Letters
 
-A small, open-source Chrome extension that locally hides messages from selected
-users on Discord and GitHub—or replaces their content with a positive phrase of
-your choice. It does not block, report, delete, or modify any content on either
-service: the change exists only in your browser.
+A small, open-source Chrome extension that locally replaces or hides messages from selected users on Discord and GitHub. It does not block, report, delete, or modify any content on either service: the change exists only in your browser.
 
-> The main idea of this project is to **stay positive and save your aura from
-> toxic vibes**.
+> The main idea of this project is to **reduce stress, save your aura from
+> toxic vibes and stay positive**.
 
 Github — replace mode
-
-
 <img width="1070" height="176" alt="image" src="https://github.com/user-attachments/assets/4514825e-cc1e-4ffa-85f6-a808c4a69419" />
 
 <img width="1007" height="241" alt="image" src="https://github.com/user-attachments/assets/8fef1c57-0df5-43ac-855e-ecfb9a1c6b1f" />
@@ -20,12 +15,6 @@ Discord — hide mode
 <img width="789" height="165" alt="image" src="https://github.com/user-attachments/assets/04a17c67-afe1-479d-ab25-7c159fa8aedd" />
 <img width="801" height="116" alt="image" src="https://github.com/user-attachments/assets/08b49aec-1327-4268-9aaf-47b603604bd0" />
 
-
-
-The default filters are:
-
-- Discord display name: `Dionis | Usual Goblin`
-- GitHub login: `Dionis404`
 
 The default action is **Replace** and the default replacement is `Nice Idea!`.
 
